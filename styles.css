@@ -65,11 +65,13 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  overflow: hidden;
   height: 400px;
   width: 800px;
   background-color: #ffffff;
   border: 2px solid black;
   border-radius: 10px;
+  transition: width 0.9s ease, height 0.9s ease;
 }
 
 .modal.is-open {
@@ -80,8 +82,60 @@ button {
   margin: auto;
   opacity: 1;
   transition: opacity 0.45s ease;
+  position: relative;
+  z-index: 2;
+  color: #111111;
 }
 
 .modal p.fade {
   opacity: 0;
+}
+
+.modal-hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.modal-photo {
+  position: absolute;
+  inset: 0;
+  background-image: url("./ourimage.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  z-index: 0;
+}
+
+.modal.show-photo .modal-photo {
+  opacity: 1;
+}
+
+.modal.show-photo .modal-text {
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.heart {
+  position: absolute;
+  bottom: -24px;
+  color: #ff3b6e;
+  opacity: 0;
+  animation: heartFloat linear forwards;
+}
+
+@keyframes heartFloat {
+  0% {
+    transform: translateY(0) scale(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-280px) scale(1.2);
+    opacity: 0;
+  }
 }

@@ -2,11 +2,59 @@ const noBtn = document.querySelector(".no-button");
 const yesBtn = document.querySelector(".yes-button");
 const container = document.querySelector(".container");
 const modal = document.getElementById("celebration-modal");
-const modalText = modal.querySelector("p");
+const modalText = modal.querySelector(".modal-text");
+const heartsLayer = modal.querySelector(".modal-hearts");
+const photo = new Image();
+photo.src = "./ourimage.jpg";
 
 const FIREWORKS_MS = 4 * 60 * 1000;
+const MODAL_BASE_WIDTH = 800;
+const MODAL_BASE_HEIGHT = 400;
 let textSwapTimer = null;
 let textFadeTimer = null;
+let heartsTimer = null;
+
+function setModalSize(w, h) {
+  modal.style.width = `${Math.round(w)}px`;
+  modal.style.height = `${Math.round(h)}px`;
+}
+
+function resizeModalToPhoto() {
+  const ratio = photo.naturalWidth && photo.naturalHeight
+    ? photo.naturalWidth / photo.naturalHeight
+    : MODAL_BASE_WIDTH / MODAL_BASE_HEIGHT;
+  const maxW = innerWidth * 0.92;
+  const maxH = innerHeight * 0.88;
+  let w = maxW;
+  let h = w / ratio;
+  if (h > maxH) {
+    h = maxH;
+    w = h * ratio;
+  }
+  setModalSize(w, h);
+}
+
+function startHearts() {
+  if (heartsTimer) clearInterval(heartsTimer);
+  heartsLayer.replaceChildren();
+  heartsTimer = setInterval(() => {
+    const heart = document.createElement("span");
+    heart.className = "heart";
+    heart.textContent = "❤";
+    heart.style.left = `${Math.random() * 100}%`;
+    heart.style.fontSize = `${14 + Math.random() * 20}px`;
+    heart.style.animationDuration = `${1.7 + Math.random() * 1.1}s`;
+    heartsLayer.appendChild(heart);
+    setTimeout(() => heart.remove(), 3200);
+  }, 110);
+}
+
+function stopHearts() {
+  if (heartsTimer) {
+    clearInterval(heartsTimer);
+    heartsTimer = null;
+  }
+}
 
 function launchFireworks() {
   const canvas = document.createElement("canvas");
@@ -104,22 +152,32 @@ function launchFireworks() {
 function openModal() {
   document.body.classList.add("celebrate");
   modal.classList.add("is-open");
+  modal.classList.remove("show-photo");
+  setModalSize(MODAL_BASE_WIDTH, MODAL_BASE_HEIGHT);
   modal.setAttribute("aria-hidden", "false");
   if (textSwapTimer) clearTimeout(textSwapTimer);
   if (textFadeTimer) clearTimeout(textFadeTimer);
+  stopHearts();
+  startHearts();
   modalText.classList.remove("fade");
   modalText.textContent = "She said yes!";
   textSwapTimer = setTimeout(() => {
+    stopHearts();
     modalText.classList.add("fade");
     textFadeTimer = setTimeout(() => {
       modalText.textContent = "Wedding date: 20th April 2025";
       modalText.classList.remove("fade");
+      modal.classList.add("show-photo");
+      resizeModalToPhoto();
     }, 450);
   }, 2000);
   launchFireworks();
 }
 
 yesBtn.addEventListener("click", openModal);
+window.addEventListener("resize", () => {
+  if (modal.classList.contains("show-photo")) resizeModalToPhoto();
+});
 
 function alignNoWithYes() {
   const cr = container.getBoundingClientRect();
