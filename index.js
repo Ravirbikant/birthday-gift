@@ -23,8 +23,19 @@ function setModalSize(w, h) {
 }
 
 yesBtn.addEventListener("click", () => {
-  firecrackerAudio.muted = false;
-  firecrackerAudio.play();
+  firecrackerAudio.pause();
+  firecrackerAudio.currentTime = 0;
+  firecrackerAudio.volume = 0;
+
+  firecrackerAudio.play().then(() => {
+    let v = 0;
+    const fade = setInterval(() => {
+      v += 0.05;
+      firecrackerAudio.volume = Math.min(v, 1);
+      if (v >= 1) clearInterval(fade);
+    }, 100);
+  });
+
   openModal();
 });
 
