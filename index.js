@@ -1,6 +1,7 @@
 const noBtn = document.querySelector(".no-button");
 const yesBtn = document.querySelector(".yes-button");
 const container = document.querySelector(".container");
+const introScreen = document.querySelector(".intro-screen");
 const modal = document.getElementById("celebration-modal");
 const modalText = modal.querySelector(".modal-text");
 const heartsLayer = modal.querySelector(".modal-hearts");
@@ -16,28 +17,22 @@ let textSwapTimer = null;
 let textFadeTimer = null;
 
 let heartsTimer = null;
+const INTRO_SHOW_MS = 2600;
+const INTRO_FADE_MS = 1000;
 
 function setModalSize(w, h) {
   modal.style.width = `${Math.round(w)}px`;
   modal.style.height = `${Math.round(h)}px`;
 }
 
-yesBtn.addEventListener("click", () => {
-  firecrackerAudio.pause();
-  firecrackerAudio.currentTime = 0;
-  firecrackerAudio.volume = 0;
-
-  firecrackerAudio.play().then(() => {
-    let v = 0;
-    const fade = setInterval(() => {
-      v += 0.05;
-      firecrackerAudio.volume = Math.min(v, 1);
-      if (v >= 1) clearInterval(fade);
-    }, 100);
-  });
-
-  openModal();
-});
+function revealQuestionScreen() {
+  introScreen.classList.add("fade-out");
+  setTimeout(() => {
+    introScreen.remove();
+    container.classList.add("show");
+    alignNoWithYes();
+  }, INTRO_FADE_MS);
+}
 
 function resizeModalToPhoto() {
   const ratio =
@@ -170,6 +165,17 @@ function launchFireworks() {
 }
 
 function openModal() {
+  firecrackerAudio.pause();
+  firecrackerAudio.currentTime = 0;
+  firecrackerAudio.volume = 0;
+  firecrackerAudio.play().then(() => {
+    let v = 0;
+    const fade = setInterval(() => {
+      v += 0.05;
+      firecrackerAudio.volume = Math.min(v, 1);
+      if (v >= 1) clearInterval(fade);
+    }, 100);
+  }).catch(() => {});
   document.body.classList.add("celebrate");
   modal.classList.add("is-open");
   modal.classList.remove("show-photo");
@@ -210,7 +216,7 @@ function alignNoWithYes() {
   noBtn.style.top = y.top - cr.top - bt + "px";
 }
 
-alignNoWithYes();
+setTimeout(revealQuestionScreen, INTRO_SHOW_MS);
 window.addEventListener("resize", alignNoWithYes);
 
 noBtn.addEventListener("mouseover", () => {

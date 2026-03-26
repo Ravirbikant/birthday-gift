@@ -31,6 +31,39 @@ body.celebrate {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.container.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  transition: opacity 1s ease;
+}
+
+.intro-screen p {
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem;
+  color: #d6336c;
+  text-align: center;
+  max-width: min(90vw, 900px);
+}
+
+.intro-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .container h2 {
