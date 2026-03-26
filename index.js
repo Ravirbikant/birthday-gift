@@ -26,6 +26,19 @@ function setModalSize(w, h) {
   modal.style.height = `${Math.round(h)}px`;
 }
 
+function setBaseModalSize() {
+  const ratio = MODAL_BASE_WIDTH / MODAL_BASE_HEIGHT;
+  const maxW = innerWidth * 0.92;
+  const maxH = innerHeight * 0.68;
+  let w = Math.min(MODAL_BASE_WIDTH, maxW);
+  let h = w / ratio;
+  if (h > maxH) {
+    h = maxH;
+    w = h * ratio;
+  }
+  setModalSize(w, h);
+}
+
 function revealQuestionScreen() {
   introScreen.classList.add("fade-out");
   setTimeout(() => {
@@ -184,7 +197,7 @@ function openModal() {
   modal.classList.add("is-open");
   modal.classList.add("romantic-phase");
   modal.classList.remove("show-photo");
-  setModalSize(MODAL_BASE_WIDTH, MODAL_BASE_HEIGHT);
+  setBaseModalSize();
   modal.setAttribute("aria-hidden", "false");
   if (textSwapTimer) clearTimeout(textSwapTimer);
   if (textFadeTimer) clearTimeout(textFadeTimer);
@@ -208,7 +221,12 @@ function openModal() {
 
 yesBtn.addEventListener("click", openModal);
 window.addEventListener("resize", () => {
-  if (modal.classList.contains("show-photo")) resizeModalToPhoto();
+  if (!modal.classList.contains("is-open")) return;
+  if (modal.classList.contains("show-photo")) {
+    resizeModalToPhoto();
+  } else {
+    setBaseModalSize();
+  }
 });
 
 function alignNoWithYes() {

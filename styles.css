@@ -10,6 +10,7 @@ body {
   align-items: center;
   height: 100vh;
   min-height: 100vh;
+  padding: 16px;
   background: radial-gradient(circle at 20% 20%, #fff7fb, #ffeef5 45%, #ffe6f0 100%);
   transition: background-color 2s ease;
   font-family: "Nunito", sans-serif;
@@ -22,12 +23,12 @@ body.celebrate {
 .container {
   position: relative;
   background: linear-gradient(145deg, #fff8fb, #ffeef5);
-  padding: 20px;
+  padding: clamp(16px, 3vw, 28px);
   border-radius: 16px;
   border: 1px solid #ffd4e4;
   box-shadow: 0 20px 45px rgba(214, 51, 108, 0.18);
-  height: 400px;
-  width: 800px;
+  height: min(400px, 68vh);
+  width: min(800px, 92vw);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,7 +57,7 @@ body.celebrate {
 
 .intro-screen p {
   font-family: "Dancing Script", cursive;
-  font-size: 3rem;
+  font-size: clamp(2rem, 7vw, 3rem);
   color: #cc2f68;
   text-align: center;
   max-width: min(90vw, 900px);
@@ -69,7 +70,7 @@ body.celebrate {
 
 .container h2 {
   font-family: "Dancing Script", cursive;
-  font-size: 3.1rem;
+  font-size: clamp(2.1rem, 7vw, 3.1rem);
   font-weight: 700;
   color: #cc2f68;
   text-shadow: 0 2px 12px rgba(204, 47, 104, 0.18);
@@ -78,18 +79,19 @@ body.celebrate {
 .buttons {
   display: flex;
   margin-top: 20px;
-  width: 20%;
+  width: auto;
+  gap: clamp(12px, 4vw, 26px);
 }
 
 button {
-  padding: 10px;
+  padding: 10px 14px;
   border-radius: 10px;
   border: 1px solid transparent;
   cursor: pointer;
   font-family: "Nunito", sans-serif;
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
   font-weight: 700;
-  min-width: 92px;
+  min-width: clamp(84px, 24vw, 110px);
   color: #ffffff;
 }
 
@@ -117,8 +119,8 @@ button {
   transform: translate(-50%, -50%);
   z-index: 1000;
   overflow: hidden;
-  height: 400px;
-  width: 800px;
+  height: min(400px, 68vh);
+  width: min(800px, 92vw);
   background-color: #ffffff;
   border: 2px solid black;
   border-radius: 10px;
@@ -141,9 +143,25 @@ button {
   z-index: 2;
   color: #111111;
   font-family: "Dancing Script", cursive;
-  font-size: 3.3rem;
+  font-size: clamp(2.1rem, 7vw, 3.3rem);
   font-weight: 700;
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  .container {
+    height: min(420px, 74vh);
+    border-radius: 14px;
+  }
+
+  .modal {
+    border-radius: 14px;
+    border-width: 1px;
+  }
 }
 
 .modal p.fade {
