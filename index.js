@@ -209,7 +209,7 @@ function openModal() {
     stopHearts();
     modalText.classList.add("fade");
     textFadeTimer = setTimeout(() => {
-      modalText.textContent = "Wedding date: 20th April 2025";
+      modalText.textContent = "Wedding date: 20th April 2026";
       modalText.classList.remove("fade");
       modal.classList.remove("romantic-phase");
       modal.classList.add("show-photo");
