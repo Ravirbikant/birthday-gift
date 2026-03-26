@@ -21,6 +21,8 @@ function launchFireworks() {
     "#ffffff",
   ];
   const particles = [];
+  const start = performance.now();
+  const fadeMs = 2000;
   const burstEnd = performance.now() + FIREWORKS_MS;
 
   function resize() {
@@ -59,7 +61,8 @@ function launchFireworks() {
 
   function frame() {
     tick();
-    ctx.fillStyle = "rgba(0,0,0,0.15)";
+    const fade = Math.min(1, (performance.now() - start) / fadeMs);
+    ctx.fillStyle = `rgba(0,0,0,${0.15 * fade})`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
