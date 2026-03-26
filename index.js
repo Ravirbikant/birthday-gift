@@ -3,6 +3,8 @@ const yesBtn = document.querySelector(".yes-button");
 const container = document.querySelector(".container");
 const modal = document.getElementById("celebration-modal");
 
+const FIREWORKS_MS = 4 * 60 * 1000;
+
 function launchFireworks() {
   const canvas = document.createElement("canvas");
   canvas.style.cssText =
@@ -19,7 +21,7 @@ function launchFireworks() {
     "#ffffff",
   ];
   const particles = [];
-  let burstUntil = performance.now() + 4500;
+  const burstEnd = performance.now() + FIREWORKS_MS;
 
   function resize() {
     canvas.width = innerWidth;
@@ -47,7 +49,7 @@ function launchFireworks() {
   }
 
   function tick() {
-    if (performance.now() < burstUntil && Math.random() < 0.12) {
+    if (performance.now() < burstEnd && Math.random() < 0.12) {
       burst(
         canvas.width * (0.15 + Math.random() * 0.7),
         canvas.height * (0.1 + Math.random() * 0.45),
@@ -76,7 +78,7 @@ function launchFireworks() {
     }
     ctx.globalAlpha = 1;
     const done =
-      performance.now() > burstUntil + 2500 && particles.length === 0;
+      performance.now() >= burstEnd && particles.length === 0;
     if (!done) {
       requestAnimationFrame(frame);
     } else {
@@ -94,6 +96,7 @@ function launchFireworks() {
 }
 
 function openModal() {
+  document.body.classList.add("celebrate");
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
   launchFireworks();

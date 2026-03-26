@@ -9,6 +9,13 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  min-height: 100vh;
+  background-color: #ffffff;
+  transition: background-color 24s ease;
+}
+
+body.celebrate {
+  background-color: #000000;
 }
 
 .container {
