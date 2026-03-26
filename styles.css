@@ -86,6 +86,7 @@ body.celebrate {
   font-weight: 700;
   color: #cc2f68;
   text-shadow: 0 2px 12px rgba(204, 47, 104, 0.18);
+  text-align: center;
 }
 
 .buttons {
