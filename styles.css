@@ -11,7 +11,12 @@ body {
   height: 100vh;
   min-height: 100vh;
   padding: 16px;
-  background: radial-gradient(circle at 20% 20%, #fff7fb, #ffeef5 45%, #ffe6f0 100%);
+  background: radial-gradient(
+    circle at 20% 20%,
+    #fff7fb,
+    #ffeef5 45%,
+    #ffe6f0 100%
+  );
   transition: background-color 2s ease;
   font-family: "Nunito", sans-serif;
 }
@@ -36,7 +41,9 @@ body.celebrate {
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .container.show {
@@ -51,7 +58,12 @@ body.celebrate {
   z-index: 1200;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle at 30% 20%, #fff9fc, #ffeef7 55%, #ffe4f1 100%);
+  background: radial-gradient(
+    circle at 30% 20%,
+    #fff9fc,
+    #ffeef7 55%,
+    #ffe4f1 100%
+  );
   transition: opacity 1s ease;
 }
 
@@ -124,7 +136,9 @@ button {
   background-color: #ffffff;
   border: 2px solid black;
   border-radius: 10px;
-  transition: width 0.9s ease, height 0.9s ease;
+  transition:
+    width 0.9s ease,
+    height 0.9s ease;
 }
 
 .modal.is-open {
@@ -132,7 +146,12 @@ button {
 }
 
 .modal.romantic-phase {
-  background: radial-gradient(circle at 30% 25%, #fff4f9, #ffdbe9 58%, #ffc7de 100%);
+  background: radial-gradient(
+    circle at 30% 25%,
+    #fff4f9,
+    #ffdbe9 58%,
+    #ffc7de 100%
+  );
 }
 
 .modal p {
@@ -162,6 +181,24 @@ button {
     border-radius: 14px;
     border-width: 1px;
   }
+
+  .intro-screen p {
+    font-size: 44px;
+  }
+
+  .container h2 {
+    font-size: 46px;
+  }
+
+  button {
+    font-size: 22px;
+    min-width: 118px;
+    padding: 12px 16px;
+  }
+
+  .modal p {
+    font-size: 44px;
+  }
 }
 
 .modal p.fade {
@@ -178,7 +215,11 @@ button {
 }
 
 .modal.romantic-phase .modal-hearts {
-  background: linear-gradient(to top, rgba(255, 130, 175, 0.2), rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    to top,
+    rgba(255, 130, 175, 0.2),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 .modal-photo {
