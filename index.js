@@ -240,14 +240,20 @@ function alignNoWithYes() {
   noBtn.style.top = y.top - cr.top - bt + "px";
 }
 
-setTimeout(revealQuestionScreen, INTRO_SHOW_MS);
-window.addEventListener("resize", alignNoWithYes);
-
-noBtn.addEventListener("mouseover", () => {
+function moveNoButton() {
   const x =
     Math.random() * Math.max(0, container.clientWidth - noBtn.offsetWidth);
   const y =
     Math.random() * Math.max(0, container.clientHeight - noBtn.offsetHeight);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
+}
+
+setTimeout(revealQuestionScreen, INTRO_SHOW_MS);
+window.addEventListener("resize", alignNoWithYes);
+
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  moveNoButton();
 });
