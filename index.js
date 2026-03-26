@@ -5,13 +5,16 @@ const modal = document.getElementById("celebration-modal");
 const modalText = modal.querySelector(".modal-text");
 const heartsLayer = modal.querySelector(".modal-hearts");
 const photo = new Image();
+const firecrackerAudio = new Audio("./Firecrackers.mp3");
 photo.src = "./ourimage.jpg";
+firecrackerAudio.preload = "auto";
 
 const FIREWORKS_MS = 4 * 60 * 1000;
 const MODAL_BASE_WIDTH = 800;
 const MODAL_BASE_HEIGHT = 400;
 let textSwapTimer = null;
 let textFadeTimer = null;
+
 let heartsTimer = null;
 
 function setModalSize(w, h) {
@@ -19,10 +22,17 @@ function setModalSize(w, h) {
   modal.style.height = `${Math.round(h)}px`;
 }
 
+yesBtn.addEventListener("click", () => {
+  firecrackerAudio.muted = false;
+  firecrackerAudio.play();
+  openModal();
+});
+
 function resizeModalToPhoto() {
-  const ratio = photo.naturalWidth && photo.naturalHeight
-    ? photo.naturalWidth / photo.naturalHeight
-    : MODAL_BASE_WIDTH / MODAL_BASE_HEIGHT;
+  const ratio =
+    photo.naturalWidth && photo.naturalHeight
+      ? photo.naturalWidth / photo.naturalHeight
+      : MODAL_BASE_WIDTH / MODAL_BASE_HEIGHT;
   const maxW = innerWidth * 0.92;
   const maxH = innerHeight * 0.88;
   let w = maxW;
@@ -131,8 +141,7 @@ function launchFireworks() {
       if (p.life <= 0) particles.splice(i, 1);
     }
     ctx.globalAlpha = 1;
-    const done =
-      performance.now() >= burstEnd && particles.length === 0;
+    const done = performance.now() >= burstEnd && particles.length === 0;
     if (!done) {
       requestAnimationFrame(frame);
     } else {
