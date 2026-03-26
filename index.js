@@ -11,6 +11,7 @@ photo.src = "./ourimage.jpg";
 firecrackerAudio.preload = "auto";
 
 const FIREWORKS_MS = 4 * 60 * 1000;
+const SHE_SAID_YES_MS = 4000;
 const MODAL_BASE_WIDTH = 800;
 const MODAL_BASE_HEIGHT = 400;
 let textSwapTimer = null;
@@ -18,7 +19,7 @@ let textFadeTimer = null;
 
 let heartsTimer = null;
 const INTRO_SHOW_MS = 2600;
-const INTRO_FADE_MS = 1000;
+const INTRO_FADE_MS = 2500;
 
 function setModalSize(w, h) {
   modal.style.width = `${Math.round(w)}px`;
@@ -168,16 +169,20 @@ function openModal() {
   firecrackerAudio.pause();
   firecrackerAudio.currentTime = 0;
   firecrackerAudio.volume = 0;
-  firecrackerAudio.play().then(() => {
-    let v = 0;
-    const fade = setInterval(() => {
-      v += 0.05;
-      firecrackerAudio.volume = Math.min(v, 1);
-      if (v >= 1) clearInterval(fade);
-    }, 100);
-  }).catch(() => {});
+  firecrackerAudio
+    .play()
+    .then(() => {
+      let v = 0;
+      const fade = setInterval(() => {
+        v += 0.05;
+        firecrackerAudio.volume = Math.min(v, 1);
+        if (v >= 1) clearInterval(fade);
+      }, 100);
+    })
+    .catch(() => {});
   document.body.classList.add("celebrate");
   modal.classList.add("is-open");
+  modal.classList.add("romantic-phase");
   modal.classList.remove("show-photo");
   setModalSize(MODAL_BASE_WIDTH, MODAL_BASE_HEIGHT);
   modal.setAttribute("aria-hidden", "false");
@@ -193,10 +198,11 @@ function openModal() {
     textFadeTimer = setTimeout(() => {
       modalText.textContent = "Wedding date: 20th April 2025";
       modalText.classList.remove("fade");
+      modal.classList.remove("romantic-phase");
       modal.classList.add("show-photo");
       resizeModalToPhoto();
     }, 450);
-  }, 2000);
+  }, SHE_SAID_YES_MS);
   launchFireworks();
 }
 

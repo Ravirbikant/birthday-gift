@@ -10,7 +10,7 @@ body {
   align-items: center;
   height: 100vh;
   min-height: 100vh;
-  background-color: #ffffff;
+  background: radial-gradient(circle at 20% 20%, #fff7fb, #ffeef5 45%, #ffe6f0 100%);
   transition: background-color 2s ease;
   font-family: "Nunito", sans-serif;
 }
@@ -21,10 +21,11 @@ body.celebrate {
 
 .container {
   position: relative;
-  background-color: #f0f0f0;
+  background: linear-gradient(145deg, #fff8fb, #ffeef5);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid #ffd4e4;
+  box-shadow: 0 20px 45px rgba(214, 51, 108, 0.18);
   height: 400px;
   width: 800px;
   display: flex;
@@ -49,14 +50,14 @@ body.celebrate {
   z-index: 1200;
   display: grid;
   place-items: center;
-  background: #fff;
+  background: radial-gradient(circle at 30% 20%, #fff9fc, #ffeef7 55%, #ffe4f1 100%);
   transition: opacity 1s ease;
 }
 
 .intro-screen p {
   font-family: "Dancing Script", cursive;
   font-size: 3rem;
-  color: #d6336c;
+  color: #cc2f68;
   text-align: center;
   max-width: min(90vw, 900px);
 }
@@ -70,7 +71,8 @@ body.celebrate {
   font-family: "Dancing Script", cursive;
   font-size: 3.1rem;
   font-weight: 700;
-  color: #d6336c;
+  color: #cc2f68;
+  text-shadow: 0 2px 12px rgba(204, 47, 104, 0.18);
 }
 
 .buttons {
@@ -81,12 +83,14 @@ body.celebrate {
 
 button {
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
+  border: 1px solid transparent;
   cursor: pointer;
   font-family: "Nunito", sans-serif;
   font-size: 1.15rem;
   font-weight: 700;
   min-width: 92px;
+  color: #ffffff;
 }
 
 .hidden {
@@ -94,11 +98,13 @@ button {
 }
 
 .yes-button {
-  background-color: green;
+  background: linear-gradient(135deg, #ff6da3, #ff4f8a);
+  border-color: #ff76aa;
 }
 
 .no-button {
-  background-color: red;
+  background: linear-gradient(135deg, #ff9ab8, #ff6e97);
+  border-color: #ff9dbd;
   position: absolute;
   transition: all ease-in-out 0.5s;
 }
@@ -123,6 +129,10 @@ button {
   display: flex;
 }
 
+.modal.romantic-phase {
+  background: radial-gradient(circle at 30% 25%, #fff4f9, #ffdbe9 58%, #ffc7de 100%);
+}
+
 .modal p {
   margin: auto;
   opacity: 1;
@@ -145,6 +155,12 @@ button {
   inset: 0;
   pointer-events: none;
   z-index: 1;
+  background: transparent;
+  transition: opacity 0.45s ease;
+}
+
+.modal.romantic-phase .modal-hearts {
+  background: linear-gradient(to top, rgba(255, 130, 175, 0.2), rgba(255, 255, 255, 0));
 }
 
 .modal-photo {
