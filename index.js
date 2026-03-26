@@ -2,8 +2,11 @@ const noBtn = document.querySelector(".no-button");
 const yesBtn = document.querySelector(".yes-button");
 const container = document.querySelector(".container");
 const modal = document.getElementById("celebration-modal");
+const modalText = modal.querySelector("p");
 
 const FIREWORKS_MS = 4 * 60 * 1000;
+let textSwapTimer = null;
+let textFadeTimer = null;
 
 function launchFireworks() {
   const canvas = document.createElement("canvas");
@@ -102,6 +105,17 @@ function openModal() {
   document.body.classList.add("celebrate");
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
+  if (textSwapTimer) clearTimeout(textSwapTimer);
+  if (textFadeTimer) clearTimeout(textFadeTimer);
+  modalText.classList.remove("fade");
+  modalText.textContent = "She said yes!";
+  textSwapTimer = setTimeout(() => {
+    modalText.classList.add("fade");
+    textFadeTimer = setTimeout(() => {
+      modalText.textContent = "Wedding date: 20th April 2025";
+      modalText.classList.remove("fade");
+    }, 450);
+  }, 2000);
   launchFireworks();
 }
 

@@ -75,3 +75,13 @@ button {
 .modal.is-open {
   display: flex;
 }
+
+.modal p {
+  margin: auto;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
+.modal p.fade {
+  opacity: 0;
+}
